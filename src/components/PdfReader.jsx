@@ -9,9 +9,9 @@ if (!Uint8Array.prototype.toHex) {
 
 import { memo, useCallback, useEffect, useRef, useState } from 'react'
 import * as pdfjsLib from 'pdfjs-dist'
-import pdfWorker from '../pdf-worker.js?url'
+import pdfWorkerUrl from '../pdf-worker.js?worker&url'
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorker
+pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerUrl
 
 // Individual React-controlled page item.
 // React strictly manages all DOM nodes: no direct innerHTML tampering or removeChild crashes!
