@@ -1,11 +1,11 @@
 function Navbar({ activePage, setActivePage, onSignOut }) {
-  const pages = ['Home', 'Books', 'Collections', 'Favorites']
+  const pages = ['Home', 'Books', 'Collections', 'Favorites', 'About']
 
   return (
     <header className="navbar">
       <button className="brand" type="button" onClick={() => setActivePage('Home')} aria-label="Go to home">
         <span className="brand-mark" aria-hidden="true">❧</span>
-        <span className="brand-name">The Book Nook</span>
+        <span className="brand-name">Amar Library</span>
       </button>
 
       <nav className="nav-links" aria-label="Main navigation">

@@ -1,20 +1,28 @@
-# 📖 The Book Nook
+# 📖 Amar Library
 
-A cozy, aesthetic personal digital library and in-browser PDF reader built for laptop, tablet, and mobile.
+A cozy, aesthetic personal digital library and in-browser PDF reader built for laptop, tablet, and mobile by **Sumana Choudhury**.
 
-![The Book Nook Preview](./public/hero-library.jpg)
+![Amar Library Preview](./public/hero-library.jpg)
 
-## ✨ Features
+---
 
-- **Continuous In-Browser PDF Reader**: Smooth continuous vertical scrolling with dynamic page rendering, lazy canvas viewport management, and 0-lag instant parsing.
-- **Auto-Fit & Fullscreen**: Responsive viewport scaling that automatically fits pages to your screen width and height.
+## ❧ About the Creator & Project
+
+> *"No lost bookmarks. No bent spines. Just pure stories, exactly where I left off."*
+
+**Amar Library** (*"Amar"* means *"My"* in Bengali) was built by **Sumana Choudhury** — a passionate reader who can easily get lost in fictional worlds for hours, but also a proudly clumsy human being.
+
+Between dropping heavy books, perpetually misplacing bookmarks in every corner of the house, accidentally creasing beautiful page corners, or forgetting which page she was on, reading physical books was becoming an unpredictable sport. 
+
+Amar Library is her personal, fail-safe digital sanctuary:
+- **Instant Cloud Sync**: Remembers your exact page across devices so clumsiness never gets in the way of a great chapter.
+- **Continuous In-Browser Reader**: Silky smooth continuous vertical scrolling with 0-lag instant parsing.
+- **Auto-Fit & Fullscreen**: Responsive viewport scaling that automatically fits pages to any screen size.
 - **Double-Click Quick Open**: Double click or tap any book cover to jump straight into reader mode.
-- **Reading Progress Sync**: Remembers your exact page across devices in real time with Supabase cloud storage.
 - **Custom Covers & Styling**: Edge-to-edge book cover display, ambient color accents, frosted glass action buttons, and spine titles.
-- **Organized Shelves**: Custom shelves and reading states (*Reading*, *To Read*, *Completed*), plus tag filtering and instant search.
 - **Installable PWA**: Installable directly on iOS (Safari "Add to Home Screen"), Android (Chrome "Install App"), and desktop.
 - **Ambient Audio**: Optional ambient rain and cozy background sounds while reading.
-- **Secure Supabase Cloud Backend**: Row-Level Security (RLS) PostgreSQL database and private storage buckets for PDFs and cover assets.
+- **Secure Cloud Backend**: Supabase PostgreSQL database with Row-Level Security (RLS) and private storage buckets.
 
 ---
 
@@ -36,8 +44,8 @@ A cozy, aesthetic personal digital library and in-browser PDF reader built for l
 
 ### 2. Clone and Install
 ```bash
-git clone https://github.com/SumanaChoudhury/the-book-nook.git
-cd the-book-nook
+git clone https://github.com/SumanaChoudhury/amar-library.git
+cd amar-library
 npm install
 ```
 
@@ -65,12 +73,12 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 1. Push this repository to your GitHub account:
    ```bash
-   git remote add origin https://github.com/SumanaChoudhury/the-book-nook.git
+   git remote set-url origin https://github.com/SumanaChoudhury/amar-library.git
    git branch -M main
    git push -u origin main
    ```
 2. Go to [Vercel](https://vercel.com/) and click **"Add New" > "Project"**.
-3. Import your `the-book-nook` repository.
+3. Import your `amar-library` repository.
 4. Under **Environment Variables**, add:
    - `VITE_SUPABASE_URL`: Your Supabase URL
    - `VITE_SUPABASE_PUBLISHABLE_KEY`: Your Supabase Publishable Key
@@ -83,7 +91,7 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 - **iPhone / iPad**: Open your deployed Vercel URL in Safari, tap the **Share** button (box with arrow), and choose **"Add to Home Screen"**.
 - **Android**: Open the URL in Chrome, tap the menu (⋮), and choose **"Install app"** or **"Add to Home screen"**.
-- **Desktop (Chrome / Edge)**: Click the install icon in the URL bar to launch The Book Nook as a standalone desktop app.
+- **Desktop (Chrome / Edge)**: Click the install icon in the URL bar to launch Amar Library as a standalone desktop app.
 
 ---
 

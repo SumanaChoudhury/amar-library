@@ -847,7 +847,7 @@ function App() {
     return (
       <div className="loading-screen">
         <span className="loading-icon" aria-hidden="true">❧</span>
-        <p className="loading-message">Opening your cozy bookshelf...</p>
+        <p className="loading-message">Opening Amar Library...</p>
       </div>
     )
   }
@@ -887,11 +887,12 @@ function App() {
                 <button type="submit" aria-label="Search">→</button>
               </form>
             </div>
-            <div className="hero-bottom-note" aria-hidden="true">A little nook for your next great adventure</div>
+            <div className="hero-bottom-note" aria-hidden="true">A cozy sanctuary for your next great adventure</div>
           </section>
         )}
 
         {/* Bookshelf & Collections Section */}
+        {activePage !== 'About' && (
         <section className="books-section">
           <div className="section-heading">
             <div>
@@ -1251,6 +1252,91 @@ function App() {
             </div>
           )}
         </section>
+        )}
+
+        {/* About Sumana & Amar Library Section */}
+        {(activePage === 'About' || activePage === 'Home') && (
+          <section className={`about-me-section ${activePage === 'About' ? 'about-page-view' : ''}`} id="about">
+            <div className="about-me-card">
+              <div className="about-me-header">
+                <div className="about-avatar-wrap">
+                  <div className="about-avatar-circle" aria-hidden="true">
+                    <span className="about-initials">SC</span>
+                  </div>
+                  <span className="about-status-pill">Curator &amp; Reader</span>
+                </div>
+                <div className="about-title-group">
+                  <p className="eyebrow">MEET THE CREATOR ❧</p>
+                  <h2>Sumana Choudhury</h2>
+                  <p className="about-tagline">A cozy reading sanctuary crafted by a passionate book lover.</p>
+                </div>
+              </div>
+
+              <div className="about-me-content">
+                <div className="about-narrative">
+                  <p className="about-lead">
+                    Hi, I’m <strong>Sumana Choudhury</strong> — a passionate reader who can easily get lost in 
+                    fictional worlds for hours, but also a proudly <em>clumsy</em> human being.
+                  </p>
+                  <p>
+                    Between dropping heavy books, constantly misplacing bookmarks in every corner of the house, 
+                    accidentally creasing lovely page corners, or losing track of which page I was on, 
+                    reading physical books was starting to feel like a high-stakes sport!
+                  </p>
+                  <p>
+                    That’s why I created <strong>Amar Library</strong> (<em>&ldquo;Amar&rdquo;</em> means <em>&ldquo;My&rdquo;</em> in Bengali) — 
+                    my personal, fail-safe digital sanctuary. I built this space to make reading completely effortless: 
+                    smooth continuous vertical scrolling, automatic full-screen page resizing, instant cloud sync 
+                    that never forgets my page, ambient sounds, and an aesthetic bookshelf I can take with me anywhere — 
+                    from my laptop to my phone in bed.
+                  </p>
+                  <div className="about-quote">
+                    <span className="quote-mark" aria-hidden="true">&ldquo;</span>
+                    <p>No lost bookmarks. No bent spines. Just pure stories, exactly where I left off.</p>
+                  </div>
+                </div>
+
+                <div className="about-badges-grid">
+                  <div className="about-badge-card">
+                    <span className="badge-icon">☕</span>
+                    <h4>Chai &amp; Stories</h4>
+                    <p>Always reading with a warm cup nearby (kept at a safe distance now!).</p>
+                  </div>
+                  <div className="about-badge-card">
+                    <span className="badge-icon">🔖</span>
+                    <h4>Zero Lost Pages</h4>
+                    <p>Cloud progress tracking ensures clumsiness never gets between me and my stories.</p>
+                  </div>
+                  <div className="about-badge-card">
+                    <span className="badge-icon">📱</span>
+                    <h4>Read Everywhere</h4>
+                    <p>Installed as an app across phone, tablet, and laptop for effortless, cozy reading.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="about-actions">
+                <button
+                  type="button"
+                  className="primary-action-btn"
+                  onClick={() => setActivePage('Books')}
+                >
+                  Explore My Bookshelf
+                </button>
+                <button
+                  type="button"
+                  className="secondary-action-btn"
+                  onClick={() => {
+                    setActivePage('Books')
+                    setShowAddBook(true)
+                  }}
+                >
+                  + Add a Book
+                </button>
+              </div>
+            </div>
+          </section>
+        )}
       </main>
 
       {/* Edit Book Modal */}
