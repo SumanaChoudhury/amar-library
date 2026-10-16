@@ -2720,18 +2720,52 @@ input:focus, textarea:focus, select:focus { border-color: #84916b; box-shadow: 0
 [data-theme="dark"] .edit-modal-card input,
 [data-theme="dark"] .edit-modal-card select,
 [data-theme="dark"] .edit-modal-card textarea,
-[data-theme="dark"] input,
-[data-theme="dark"] select,
-[data-theme="dark"] textarea {
+[data-theme="dark"] .manual-bookmark input,
+[data-theme="dark"] .collection-item input {
   background: #131715 !important;
   border-color: rgba(255, 255, 255, 0.12) !important;
   color: #ede8de !important;
 }
 
+/* Keep search boxes fully white in dark mode */
+[data-theme="dark"] .hero-search {
+  background: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.95) !important;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28) !important;
+}
+
+[data-theme="dark"] .hero-search > span {
+  color: #6e755c !important;
+}
+
+[data-theme="dark"] .hero-search input {
+  background: transparent !important;
+  color: #2b3527 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+[data-theme="dark"] .hero-search input::placeholder {
+  color: #7b8374 !important;
+}
+
+[data-theme="dark"] .hero-search button {
+  background: #53664b !important;
+  color: #fff9e9 !important;
+}
+
 [data-theme="dark"] .books-search-input {
-  background: #1a1f1c !important;
-  border-color: rgba(255, 255, 255, 0.1) !important;
-  color: #ede8de !important;
+  background: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.8) !important;
+  color: #2b3527 !important;
+}
+
+[data-theme="dark"] .books-search-input::placeholder {
+  color: #7b8374 !important;
+}
+
+[data-theme="dark"] .search-icon {
+  color: #7b8374 !important;
 }
 
 [data-theme="dark"] .section-heading h2 {
