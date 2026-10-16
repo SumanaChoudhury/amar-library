@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabase'
 
 function Auth({ onOtpVerified }) {
@@ -18,6 +18,16 @@ function Auth({ onOtpVerified }) {
   const [message, setMessage] = useState('')
   const [isError, setIsError] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [cooldown, setCooldown] = useState(0)
+
+  // Cooldown countdown timer
+  useEffect(() => {
+    if (cooldown <= 0) return
+    const timer = setTimeout(() => {
+      setCooldown((prev) => prev - 1)
+    }, 1000)
+    return () => clearTimeout(timer)
+  }, [cooldown])
 
   // Standard Login & Registration
   async function handleAuthSubmit(event) {
@@ -102,12 +112,20 @@ function Auth({ onOtpVerified }) {
 
       if (error) throw error
 
+      setCooldown(60)
       setForgotStep('verify')
       setMessage(`Verification code sent to ${trimmedEmail}! Check your inbox and spam folder.`)
     } catch (error) {
       setIsError(true)
       console.error('Send OTP error:', error)
-      setMessage(error.message || 'Unable to send OTP. Please check your email and try again.')
+      if (error.message?.toLowerCase().includes('rate limit')) {
+        setCooldown(60)
+        setMessage(
+          'Email rate limit reached (Supabase limits recovery emails to prevent spam). If you already received a code earlier in your inbox or spam folder, click "Already have an OTP code? Enter Code" below to log in! Otherwise, please wait 60 seconds.'
+        )
+      } else {
+        setMessage(error.message || 'Unable to send OTP. Please check your email and try again.')
+      }
     } finally {
       setLoading(false)
     }
@@ -293,8 +311,29 @@ function Auth({ onOtpVerified }) {
               />
             </label>
 
-            <button type="submit" className="auth-submit-btn" disabled={loading}>
-              {loading ? 'Sending OTP code...' : 'Send OTP Code →'}
+            <button
+              type="submit"
+              className="auth-submit-btn"
+              disabled={loading || cooldown > 0}
+            >
+              {loading
+                ? 'Sending OTP code...'
+                : cooldown > 0
+                  ? `Wait ${cooldown}s to resend code`
+                  : 'Send OTP Code →'}
+            </button>
+
+            <button
+              type="button"
+              className="auth-link-secondary"
+              style={{ fontWeight: 600, color: 'var(--forest)' }}
+              onClick={() => {
+                setForgotStep('verify')
+                setMessage('')
+                setIsError(false)
+              }}
+            >
+              Already have an OTP code? Enter Code →
             </button>
 
             <button
@@ -340,9 +379,9 @@ function Auth({ onOtpVerified }) {
                 type="button"
                 className="auth-link-secondary"
                 onClick={handleSendOtp}
-                disabled={loading}
+                disabled={loading || cooldown > 0}
               >
-                Resend OTP Code
+                {cooldown > 0 ? `Resend in ${cooldown}s` : 'Resend OTP Code'}
               </button>
               <button
                 type="button"
