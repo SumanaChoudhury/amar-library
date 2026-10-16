@@ -1022,6 +1022,67 @@
   text-decoration: underline;
 }
 
+.label-with-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.label-with-action span {
+  margin-bottom: 0 !important;
+}
+
+.forgot-password-link {
+  border: 0;
+  background: transparent;
+  color: var(--sage-dark);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 140ms ease;
+}
+
+.forgot-password-link:hover {
+  color: var(--forest);
+}
+
+.otp-input-field {
+  letter-spacing: 6px;
+  font-size: 20px !important;
+  font-family: monospace, monospace;
+  text-align: center;
+  font-weight: 700;
+  color: var(--forest) !important;
+  background: #fffdf8 !important;
+}
+
+.auth-link-secondary {
+  border: 0;
+  background: transparent;
+  color: var(--muted);
+  font-size: 12px;
+  cursor: pointer;
+  padding: 6px 0;
+  text-align: center;
+  transition: color 150ms ease;
+}
+
+.auth-link-secondary:hover {
+  color: var(--forest);
+  text-decoration: underline;
+}
+
+.auth-row-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+}
+
 /* =========================================================
    AESTHETIC FLOATING COZY MUSIC PLAYER
    ========================================================= */

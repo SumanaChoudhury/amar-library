@@ -59,6 +59,14 @@ function App() {
   const [openingBookId, setOpeningBookId] = useState(null)
   const [selectedPdfBook, setSelectedPdfBook] = useState(null)
 
+  // Forgot password & OTP new password state
+  const [requireNewPassword, setRequireNewPassword] = useState(false)
+  const [newPasswordInput, setNewPasswordInput] = useState('')
+  const [confirmPasswordInput, setConfirmPasswordInput] = useState('')
+  const [passwordModalMsg, setPasswordModalMsg] = useState('')
+  const [passwordModalError, setPasswordModalError] = useState(false)
+  const [updatingPassword, setUpdatingPassword] = useState(false)
+
   // In-memory cache for cover signed URLs to eliminate redundant network requests
   const coverUrlCacheRef = useRef(new Map())
   const userId = session?.user?.id
@@ -84,9 +92,12 @@ function App() {
 
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, currentSession) => {
+    } = supabase.auth.onAuthStateChange((event, currentSession) => {
       setSession(currentSession)
       setAuthLoading(false)
+      if (event === 'PASSWORD_RECOVERY') {
+        setRequireNewPassword(true)
+      }
     })
 
     return () => {
@@ -843,6 +854,44 @@ function App() {
     })
   }, [books, search, activePage])
 
+  async function handleModalUpdatePassword(event) {
+    event.preventDefault()
+    setPasswordModalMsg('')
+    setPasswordModalError(false)
+
+    if (newPasswordInput.length < 6) {
+      setPasswordModalMsg('Password must be at least 6 characters long.')
+      setPasswordModalError(true)
+      return
+    }
+
+    if (newPasswordInput !== confirmPasswordInput) {
+      setPasswordModalMsg('Passwords do not match. Please re-enter.')
+      setPasswordModalError(true)
+      return
+    }
+
+    setUpdatingPassword(true)
+    try {
+      const { error } = await supabase.auth.updateUser({
+        password: newPasswordInput,
+      })
+      if (error) throw error
+      setPasswordModalMsg('Password updated successfully! Welcome to Amar Library.')
+      setTimeout(() => {
+        setRequireNewPassword(false)
+        setNewPasswordInput('')
+        setConfirmPasswordInput('')
+        setPasswordModalMsg('')
+      }, 1200)
+    } catch (err) {
+      setPasswordModalError(true)
+      setPasswordModalMsg(err.message || 'Could not update password. Please try again.')
+    } finally {
+      setUpdatingPassword(false)
+    }
+  }
+
   if (authLoading) {
     return (
       <div className="loading-screen">
@@ -853,7 +902,7 @@ function App() {
   }
 
   if (!session) {
-    return <Auth />
+    return <Auth onOtpVerified={() => setRequireNewPassword(true)} />
   }
 
   return (
@@ -1330,6 +1379,84 @@ function App() {
           </p>
         </div>
       </footer>
+
+      {/* Set New Password Modal after OTP login or password recovery */}
+      {requireNewPassword && session && (
+        <div className="modal-backdrop" role="dialog" aria-modal="true" aria-label="Set new password">
+          <div className="edit-modal-card" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span className="auth-flower" aria-hidden="true">❧</span>
+                <h3>Create Your New Password</h3>
+              </div>
+              <button
+                type="button"
+                className="close-modal-icon"
+                onClick={() => setRequireNewPassword(false)}
+                aria-label="Close"
+              >
+                ✕
+              </button>
+            </div>
+
+            <p className="auth-subtitle" style={{ margin: '8px 0 18px', color: '#686d5e' }}>
+              Welcome back! You logged in with your verification code. Please choose a new password for future sign-ins.
+            </p>
+
+            <form onSubmit={handleModalUpdatePassword} className="auth-form">
+              <label htmlFor="modal-new-password">
+                <span>New password (min 6 characters) *</span>
+                <input
+                  id="modal-new-password"
+                  type="password"
+                  value={newPasswordInput}
+                  onChange={(e) => setNewPasswordInput(e.target.value)}
+                  placeholder="At least 6 characters"
+                  minLength={6}
+                  required
+                  autoFocus
+                />
+              </label>
+
+              <label htmlFor="modal-confirm-password">
+                <span>Confirm new password *</span>
+                <input
+                  id="modal-confirm-password"
+                  type="password"
+                  value={confirmPasswordInput}
+                  onChange={(e) => setConfirmPasswordInput(e.target.value)}
+                  placeholder="Repeat your new password"
+                  minLength={6}
+                  required
+                />
+              </label>
+
+              {passwordModalMsg && (
+                <div className={`auth-feedback ${passwordModalError ? 'error' : 'success'}`}>
+                  {passwordModalMsg}
+                </div>
+              )}
+
+              <div className="modal-actions-row">
+                <button
+                  type="button"
+                  className="secondary-action-btn"
+                  onClick={() => setRequireNewPassword(false)}
+                >
+                  Skip for now
+                </button>
+                <button
+                  type="submit"
+                  className="primary-action-btn"
+                  disabled={updatingPassword}
+                >
+                  {updatingPassword ? 'Saving...' : 'Save New Password & Continue'}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* Edit Book Modal */}
       {editingBook && (
