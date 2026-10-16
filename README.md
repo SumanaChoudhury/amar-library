@@ -1,4 +1,4 @@
-# 📖 Amar Library
+# Amar Library
 
 A cozy, aesthetic personal digital library and in-browser PDF reader built for laptop, tablet, and mobile by **Sumana Choudhury**.
 
@@ -26,7 +26,7 @@ Amar Library is her personal, fail-safe digital sanctuary:
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Frontend**: [React 19](https://react.dev/), [Vite](https://vitejs.dev/)
 - **PDF Engine**: [PDF.js](https://mozilla.github.io/pdf.js/) with web worker offloading and streaming ArrayBuffer parsing
@@ -36,7 +36,7 @@ Amar Library is her personal, fail-safe digital sanctuary:
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Prerequisites
 - [Node.js](https://nodejs.org/) (v18 or higher recommended)
@@ -69,7 +69,7 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ---
 
-## 🌐 Deploy to Vercel (1-Click Hosting)
+## Deploy to Vercel (1-Click Hosting)
 
 1. Push this repository to your GitHub account:
    ```bash
@@ -87,7 +87,7 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ---
 
-## 📱 Installing as a Mobile App (PWA)
+## Installing as a Mobile App (PWA)
 
 - **iPhone / iPad**: Open your deployed Vercel URL in Safari, tap the **Share** button (box with arrow), and choose **"Add to Home Screen"**.
 - **Android**: Open the URL in Chrome, tap the menu (⋮), and choose **"Install app"** or **"Add to Home screen"**.
@@ -95,5 +95,5 @@ Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ---
 
-## 📄 License
+## License
 MIT © Sumana Choudhury

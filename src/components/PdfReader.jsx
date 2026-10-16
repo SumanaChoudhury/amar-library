@@ -548,7 +548,7 @@ export default function PdfReader({
       {/* Top Header Bar */}
       <div className="pdf-reader-header-bar">
         <div className="pdf-book-meta">
-          <span className="pdf-meta-badge">📖 READING</span>
+          <span className="pdf-meta-badge">READING</span>
           <h2 title={book.title}>{book.title}</h2>
           {book.author && <span className="pdf-author">by {book.author}</span>}
         </div>
@@ -561,7 +561,7 @@ export default function PdfReader({
             className="pdf-action-link"
             title="Open direct cloud PDF in new tab or external viewer"
           >
-            Open in Tab ↗
+            Open in Tab
           </a>
 
           <button
@@ -570,7 +570,7 @@ export default function PdfReader({
             onClick={handleSafeClose}
             aria-label="Close reader"
           >
-            Close ✕
+            Close
           </button>
         </div>
       </div>
@@ -646,7 +646,7 @@ export default function PdfReader({
             }}
             title="Fit Width: Expands PDF automatically to fill screen width"
           >
-            ↔ Fit Width
+            Fit Width
           </button>
 
           <button
@@ -658,7 +658,7 @@ export default function PdfReader({
             }}
             title="Fit Screen: Fits whole page height in view"
           >
-            ↕ Fit Screen
+            Fit Screen
           </button>
 
           {/* Zoom controls */}
@@ -699,7 +699,7 @@ export default function PdfReader({
                 : 'Full screen (automatically scales PDF to fill screen)'
             }
           >
-            {fullscreen ? '⤓ Exit Fullscreen' : '⛶ Fullscreen'}
+            {fullscreen ? 'Exit Fullscreen' : 'Fullscreen'}
           </button>
         </div>
       </div>
@@ -736,7 +736,7 @@ export default function PdfReader({
               rel="noopener noreferrer"
               className="pdf-fallback-btn"
             >
-              Open via Cloud Link ↗
+              Open via Cloud Link
             </a>
           </div>
         )}

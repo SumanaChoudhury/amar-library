@@ -174,7 +174,7 @@ function BookCard({
               disabled={isOpening}
               title="Open in cloud tab or your default external PDF reader"
             >
-              Default App ↗
+              Default App
             </button>
           </div>
         )}

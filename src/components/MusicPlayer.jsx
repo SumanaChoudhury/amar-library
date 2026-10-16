@@ -5,35 +5,35 @@ const TRACKS = [
     id: 'lofi',
     title: 'Cozy Bookstore Lofi',
     subtitle: 'Warm chords & gentle tape warmth',
-    icon: '☕',
+    icon: '♪',
     bpm: 64,
   },
   {
     id: 'rain',
     title: 'Rain on the Window',
     subtitle: 'Soft steady rainfall & distant thunder',
-    icon: '🌧️',
+    icon: '♪',
     bpm: 0,
   },
   {
     id: 'fireplace',
     title: 'Tea & Hearth Fire',
     subtitle: 'Cozy wooden crackle & warm drone',
-    icon: '🕯️',
+    icon: '♪',
     bpm: 0,
   },
   {
     id: 'piano',
     title: 'Midnight Solitude',
     subtitle: 'Slow meditative piano notes',
-    icon: '🎹',
+    icon: '♪',
     bpm: 52,
   },
   {
     id: 'breeze',
     title: 'Autumn Garden Breeze',
     subtitle: 'Nature whisper & gentle chimes',
-    icon: '🍃',
+    icon: '♪',
     bpm: 48,
   },
 ]
@@ -333,7 +333,7 @@ export default function MusicPlayer() {
         <div className="music-card">
           <div className="music-card-header">
             <div className="music-card-title">
-              <span className="music-tag">☕ READING SOUNDTRACK</span>
+              <span className="music-tag">READING SOUNDTRACK</span>
               <h4>Slow & Cozy Sounds</h4>
             </div>
             <button
@@ -365,7 +365,7 @@ export default function MusicPlayer() {
               aria-label="Previous track"
               title="Previous"
             >
-              ⏮
+              «
             </button>
 
             <button
@@ -374,7 +374,7 @@ export default function MusicPlayer() {
               onClick={handleTogglePlay}
               aria-label={isPlaying ? 'Pause music' : 'Play music'}
             >
-              {isPlaying ? '⏸' : '▶'}
+              {isPlaying ? '❚❚' : '▶'}
             </button>
 
             <button
@@ -384,14 +384,14 @@ export default function MusicPlayer() {
               aria-label="Next track"
               title="Next"
             >
-              ⏭
+              »
             </button>
           </div>
 
           {/* Volume control */}
           <div className="music-volume-row">
             <span className="vol-icon" aria-hidden="true">
-              {volume === 0 ? '🔇' : volume < 0.5 ? '🔉' : '🔊'}
+              {volume === 0 ? 'Mute' : 'Vol'}
             </span>
             <input
               type="range"
@@ -413,7 +413,7 @@ export default function MusicPlayer() {
               checked={addRainOverlay}
               onChange={(e) => setAddRainOverlay(e.target.checked)}
             />
-            <span>🌧️ Blend soft rain in background</span>
+            <span>Blend soft rain in background</span>
           </label>
 
           {/* Track selector playlist */}

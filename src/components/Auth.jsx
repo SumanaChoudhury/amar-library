@@ -421,7 +421,7 @@ function Auth({ onOtpVerified }) {
                   onClick={() => setShowNewPassword(!showNewPassword)}
                   aria-label={showNewPassword ? 'Hide password' : 'Show password'}
                 >
-                  {showNewPassword ? '🙈' : '👁️'}
+                  {showNewPassword ? 'Hide' : 'Show'}
                 </button>
               </div>
             </label>
@@ -497,7 +497,7 @@ function Auth({ onOtpVerified }) {
                   onClick={() => setShowPassword(!showPassword)}
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                 >
-                  {showPassword ? '🙈' : '👁️'}
+                  {showPassword ? 'Hide' : 'Show'}
                 </button>
               </div>
             </label>

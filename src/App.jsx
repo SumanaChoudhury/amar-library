@@ -1059,7 +1059,7 @@ function App() {
 
               <div className="form-submit-row">
                 <button type="submit" className="save-book-btn" disabled={savingBook}>
-                  {savingBook ? 'Uploading to cloud...' : 'Place on Bookshelf 📚'}
+                  {savingBook ? 'Uploading to cloud...' : 'Place on Bookshelf'}
                 </button>
               </div>
             </form>
@@ -1067,7 +1067,7 @@ function App() {
 
           {booksError && (
             <div className="books-error" role="alert">
-              <span>⚠️</span>
+              <span className="error-mark">!</span>
               <p>{booksError}</p>
             </div>
           )}
