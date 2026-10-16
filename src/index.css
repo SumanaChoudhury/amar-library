@@ -1,24 +1,111 @@
-
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
 
 :root {
-  font-family: 'DM Sans', sans-serif;
-  color: #354638;
-  background: #faf8f1;
+  color-scheme: light dark;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --cream: #faf8f1;
-  --paper: #fffdf7;
-  --sage: #dfe8d8;
-  --sage-dark: #64785e;
-  --forest: #354638;
-  --muted: #858779;
-  --border: #e9e5d8;
-  --rose: #b87870;
-  --serif: 'Playfair Display', Georgia, serif;
+  /* =========================================================
+     LIGHT THEME: Warm Editorial Paper & Botanical Sanctuary
+     ========================================================= */
+  --bg-app: #faf7f2;
+  --bg-surface: #ffffff;
+  --bg-surface-elevated: #ffffff;
+  --bg-surface-sunken: #f2ede4;
+  --bg-surface-glass: rgba(250, 247, 242, 0.92);
+  
+  --text-primary: #1e261f;
+  --text-secondary: #576253;
+  --text-muted: #7f897b;
+  
+  --border-subtle: #e6e0d2;
+  --border-light: #efebe1;
+  --border-focus: #2d4533;
+  
+  --accent-primary: #2d4533;
+  --accent-hover: #1f3224;
+  --accent-subtle: #e7eee4;
+  --accent-text: #ffffff;
+  
+  --color-rose: #b86e64;
+  --color-gold: #c28b46;
+  
+  --card-shadow: 0 2px 8px rgba(32, 40, 33, 0.04), 0 1px 2px rgba(32, 40, 33, 0.03);
+  --card-shadow-hover: 0 14px 28px rgba(32, 40, 33, 0.08), 0 4px 10px rgba(32, 40, 33, 0.04);
+  --modal-shadow: 0 20px 48px rgba(25, 33, 26, 0.16);
+
+  --hero-gradient: radial-gradient(ellipse at 92% 15%, #e5ede0 0%, transparent 45%),
+                    linear-gradient(135deg, #f1f4ea 0%, #faf8f2 55%, #e9edde 100%);
+  --hero-card-bg: rgba(255, 255, 255, 0.85);
+
+  --serif: 'Playfair Display', Georgia, Cambria, serif;
+
+  /* Backward compatibility alias variables */
+  --cream: var(--bg-app);
+  --paper: var(--bg-surface-elevated);
+  --paper-card: var(--bg-surface);
+  --sage: var(--accent-subtle);
+  --sage-dark: var(--accent-primary);
+  --forest: var(--text-primary);
+  --forest-dark: var(--accent-hover);
+  --muted: var(--text-secondary);
+  --border: var(--border-subtle);
+  --sand: var(--bg-surface-sunken);
+  --rose: var(--color-rose);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* =========================================================
+     DARK THEME: Midnight Archive & Dark Academia
+     Warm obsidian base, gentle on eyes during late-night reading
+     ========================================================= */
+  --bg-app: #111413;
+  --bg-surface: #181d19;
+  --bg-surface-elevated: #202722;
+  --bg-surface-sunken: #131715;
+  --bg-surface-glass: rgba(17, 20, 19, 0.92);
+  
+  --text-primary: #ede8de;
+  --text-secondary: #a3ada0;
+  --text-muted: #727d6f;
+  
+  --border-subtle: rgba(255, 255, 255, 0.09);
+  --border-light: rgba(255, 255, 255, 0.05);
+  --border-focus: #7ea783;
+  
+  --accent-primary: #7ea783;
+  --accent-hover: #96bd9b;
+  --accent-subtle: #1c2b20;
+  --accent-text: #0e1510;
+  
+  --color-rose: #d68f86;
+  --color-gold: #e2b47e;
+  
+  --card-shadow: 0 4px 18px rgba(0, 0, 0, 0.42);
+  --card-shadow-hover: 0 14px 34px rgba(0, 0, 0, 0.65);
+  --modal-shadow: 0 24px 60px rgba(0, 0, 0, 0.75);
+
+  --hero-gradient: radial-gradient(ellipse at 92% 15%, #1a2a1f 0%, transparent 50%),
+                    linear-gradient(135deg, #151d18 0%, #171f19 55%, #121714 100%);
+  --hero-card-bg: rgba(24, 30, 26, 0.85);
+
+  /* Backward compatibility alias variables */
+  --cream: var(--bg-app);
+  --paper: var(--bg-surface-elevated);
+  --paper-card: var(--bg-surface);
+  --sage: var(--accent-subtle);
+  --sage-dark: var(--accent-primary);
+  --forest: var(--text-primary);
+  --forest-dark: var(--accent-hover);
+  --muted: var(--text-secondary);
+  --border: var(--border-subtle);
+  --sand: var(--bg-surface-sunken);
+  --rose: var(--color-rose);
 }
 
 * {
@@ -28,13 +115,16 @@
 html {
   min-width: 320px;
   min-height: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: var(--cream);
+  background-color: var(--bg-app);
+  color: var(--text-primary);
+  transition: background-color 0.24s ease, color 0.24s ease;
 }
 
 body,
@@ -42,7 +132,7 @@ button,
 input,
 textarea,
 select {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 button,
@@ -58,9 +148,11 @@ button {
 
 button:focus-visible,
 input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
 a:focus-visible {
-  outline: 2px solid var(--sage-dark);
-  outline-offset: 3px;
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
 }
 
 button:disabled {

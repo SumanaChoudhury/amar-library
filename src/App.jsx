@@ -67,9 +67,45 @@ function App() {
   const [passwordModalError, setPasswordModalError] = useState(false)
   const [updatingPassword, setUpdatingPassword] = useState(false)
 
+  // Light / Dark Theme Mode with system preference & localStorage persistence
+  const [theme, setTheme] = useState(() => {
+    try {
+      const saved = localStorage.getItem('amar-library-theme')
+      if (saved === 'dark' || saved === 'light') return saved
+      if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark'
+      }
+    } catch (err) {
+      console.debug('Theme preference read error:', err)
+    }
+    return 'light'
+  })
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme)
+    try {
+      localStorage.setItem('amar-library-theme', theme)
+    } catch (err) {
+      console.debug('Theme preference save error:', err)
+    }
+  }, [theme])
+
+  const toggleTheme = useCallback(() => {
+    setTheme((prev) => (prev === 'light' ? 'dark' : 'light'))
+  }, [])
+
   // In-memory cache for cover signed URLs to eliminate redundant network requests
   const coverUrlCacheRef = useRef(new Map())
   const userId = session?.user?.id
+
+  // Quick glance computations for a human, personalized library feel
+  const recentlyReadBook = useMemo(() => {
+    return books.find((b) => Number(b.last_read_page) > 0 && b.pdf_path) || null
+  }, [books])
+
+  const favoritesCount = useMemo(() => {
+    return books.filter((b) => b.is_favorite).length
+  }, [books])
 
   // Restore existing login session and listen for auth changes
   useEffect(() => {
@@ -922,32 +958,123 @@ function App() {
         activePage={activePage}
         setActivePage={setActivePage}
         onSignOut={handleSignOut}
+        theme={theme}
+        toggleTheme={toggleTheme}
       />
 
       <main>
-        {/* Aesthetic Welcome Hero */}
+        {/* Aesthetic Human Editorial Hero */}
         {activePage === 'Home' && (
           <section className="welcome-section" id="home">
-            <div className="hero-copy">
-              <p className="hero-kicker">Good books. Cozy corners. Happier days.</p>
-              <h1>A Library for<br />Dreamers &amp; Readers</h1>
-              <p className="welcome-subtext">
-                Explore a world of stories, one book at a time.<br />
-                Find your next favourite, build your shelf,<br className="desktop-break" />
-                and make this space your own.
-              </p>
-              <form className="hero-search" onSubmit={(event) => { event.preventDefault(); setActivePage('Books') }}>
-                <span aria-hidden="true">⌕</span>
-                <input
-                  aria-label="Search books"
-                  value={search}
-                  onChange={(event) => setSearch(event.target.value)}
-                  placeholder="Search for books, authors, genres..."
-                />
-                <button type="submit" aria-label="Search">→</button>
-              </form>
+            <div className="hero-grid-layout">
+              <div className="hero-copy">
+                <div className="hero-pill-badge">
+                  <span className="hero-pill-dot" aria-hidden="true" />
+                  <span>Personal Reading Sanctuary</span>
+                </div>
+                <h1>Read without rushing.<br />Keep every chapter close.</h1>
+                <p className="welcome-subtext">
+                  Amar Library is your private nook for stories, notes, and slow reading. 
+                  Resume where you left off, organize your shelves, and immerse yourself in quiet pages.
+                </p>
+
+                <div className="hero-actions-row">
+                  <button
+                    type="button"
+                    className="hero-primary-btn"
+                    onClick={() => {
+                      setActivePage('Books')
+                      setShowAddBook(true)
+                    }}
+                  >
+                    + Add to Shelf
+                  </button>
+                  <button
+                    type="button"
+                    className="hero-secondary-btn"
+                    onClick={() => setActivePage('Collections')}
+                  >
+                    My Shelves ({collections.length})
+                  </button>
+                </div>
+
+                <form className="hero-search" onSubmit={(event) => { event.preventDefault(); setActivePage('Books') }}>
+                  <span aria-hidden="true" className="search-glyph">⌕</span>
+                  <input
+                    aria-label="Search books"
+                    value={search}
+                    onChange={(event) => setSearch(event.target.value)}
+                    placeholder="Search by title, author, or genre..."
+                  />
+                  <button type="submit" aria-label="Search">→</button>
+                </form>
+              </div>
+
+              {/* Human Library Glance Card */}
+              <div className="hero-glance-card">
+                <div className="glance-header">
+                  <div>
+                    <span className="glance-eyebrow">YOUR SANCTUARY</span>
+                    <h3 className="glance-heading">Library Overview</h3>
+                  </div>
+                  <span className="glance-status-tag">Active Shelf</span>
+                </div>
+
+                <div className="glance-stats-grid">
+                  <div className="glance-stat-box">
+                    <span className="stat-number">{books.length}</span>
+                    <span className="stat-label">Books on Shelf</span>
+                  </div>
+                  <div className="glance-stat-box">
+                    <span className="stat-number">{favoritesCount}</span>
+                    <span className="stat-label">Favorites</span>
+                  </div>
+                  <div className="glance-stat-box">
+                    <span className="stat-number">{collections.length}</span>
+                    <span className="stat-label">Shelves</span>
+                  </div>
+                </div>
+
+                {recentlyReadBook ? (
+                  <div className="glance-resume-card">
+                    <div className="glance-resume-info">
+                      <span className="resume-tag">Jump back in</span>
+                      <strong className="resume-title">{recentlyReadBook.title}</strong>
+                      <span className="resume-meta">
+                        Page {recentlyReadBook.last_read_page}
+                        {recentlyReadBook.total_pages ? ` of ${recentlyReadBook.total_pages}` : ''}
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      className="glance-resume-btn"
+                      onClick={() => handleOpenPdf(recentlyReadBook, 'web')}
+                    >
+                      Continue →
+                    </button>
+                  </div>
+                ) : books.length > 0 ? (
+                  <div className="glance-resume-card">
+                    <div className="glance-resume-info">
+                      <span className="resume-tag">Ready to read</span>
+                      <strong className="resume-title">{books[0].title}</strong>
+                      <span className="resume-meta">{books[0].author || 'Tap to begin chapter 1'}</span>
+                    </div>
+                    <button
+                      type="button"
+                      className="glance-resume-btn"
+                      onClick={() => handleOpenPdf(books[0], 'web')}
+                    >
+                      Open →
+                    </button>
+                  </div>
+                ) : (
+                  <div className="glance-empty-tip">
+                    <p>Your shelf is fresh and ready. Upload your first PDF book above to start your reading room.</p>
+                  </div>
+                )}
+              </div>
             </div>
-            <div className="hero-bottom-note" aria-hidden="true">A cozy sanctuary for your next great adventure</div>
           </section>
         )}
 
