@@ -1,0 +1,18 @@
+{
+  "name": "The Book Nook",
+  "short_name": "Book Nook",
+  "description": "Your cozy aesthetic personal bookshelf and cloud PDF reader.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#faf8f1",
+  "theme_color": "#faf8f1",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
