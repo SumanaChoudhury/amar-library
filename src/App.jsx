@@ -337,7 +337,7 @@ function App() {
           .from('book-pdfs')
           .upload(uploadedPdfPath, pdfFile, {
             contentType: 'application/pdf',
-            upsert: false,
+            upsert: true,
           })
 
         if (pdfError) throw pdfError
@@ -351,7 +351,7 @@ function App() {
           .from('book-covers')
           .upload(uploadedCoverPath, coverFile, {
             contentType: coverFile.type,
-            upsert: false,
+            upsert: true,
           })
 
         if (coverError) throw coverError
@@ -417,7 +417,15 @@ function App() {
           console.warn('Book cleanup error:', cleanupErr)
         }
       }
-      setBooksError(error.message || 'Could not save the book. Check connection.')
+      let userMsg = error?.message || 'Could not save the book. Check connection.'
+      if (userMsg.includes('Failed to fetch') || error?.name === 'TypeError') {
+        userMsg =
+          'Upload failed: The "book-pdfs" storage bucket is missing in Supabase or network connection timed out. Please run the setup SQL in your Supabase dashboard.'
+      } else if (userMsg.includes('Bucket not found') || error?.code === 'NoSuchBucket') {
+        userMsg =
+          'Storage bucket not found: Please create the "book-pdfs" and "book-covers" buckets in your Supabase Dashboard.'
+      }
+      setBooksError(userMsg)
     } finally {
       setSavingBook(false)
     }
@@ -515,7 +523,11 @@ function App() {
       setEditingBook(null)
     } catch (err) {
       console.error('Failed to update book:', err)
-      setBooksError(`Could not update book: ${err.message}`)
+      let editMsg = err?.message || 'Update failed'
+      if (editMsg.includes('Failed to fetch') || err?.name === 'TypeError') {
+        editMsg = 'Connection timed out or Supabase storage buckets need to be created.'
+      }
+      setBooksError(`Could not update book: ${editMsg}`)
     } finally {
       setSavingEdit(false)
     }
