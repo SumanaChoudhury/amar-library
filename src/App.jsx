@@ -1254,29 +1254,29 @@ function App() {
         </section>
         )}
 
-        {/* About Sumana & Amar Library Section */}
-        {(activePage === 'About' || activePage === 'Home') && (
-          <section className={`about-me-section ${activePage === 'About' ? 'about-page-view' : ''}`} id="about">
+        {/* About Sumana & Amar Library Section — Only shown on About page */}
+        {activePage === 'About' && (
+          <section className="about-me-section about-page-view" id="about">
             <div className="about-me-card">
               <div className="about-me-header">
                 <div className="about-avatar-wrap">
                   <div className="about-avatar-circle" aria-hidden="true">
                     <span className="about-initials">SC</span>
                   </div>
-                  <span className="about-status-pill">Curator &amp; Reader</span>
+                  <span className="about-status-pill">Creator &amp; Reader</span>
                 </div>
                 <div className="about-title-group">
                   <p className="eyebrow">MEET THE CREATOR ❧</p>
                   <h2>Sumana Choudhury</h2>
-                  <p className="about-tagline">A cozy reading sanctuary crafted by a passionate book lover.</p>
+                  <p className="about-tagline">The story behind Amar Library.</p>
                 </div>
               </div>
 
-              <div className="about-me-content">
+              <div className="about-me-content single-column">
                 <div className="about-narrative">
                   <p className="about-lead">
                     Hi, I’m <strong>Sumana Choudhury</strong> — a passionate reader who can easily get lost in 
-                    fictional worlds for hours, but also a proudly <em>clumsy</em> human being.
+                    fictional worlds for hours, but also an undeniably <em>clumsy</em> human being.
                   </p>
                   <p>
                     Between dropping heavy books, constantly misplacing bookmarks in every corner of the house, 
@@ -1286,32 +1286,10 @@ function App() {
                   <p>
                     That’s why I created <strong>Amar Library</strong> (<em>&ldquo;Amar&rdquo;</em> means <em>&ldquo;My&rdquo;</em> in Bengali) — 
                     my personal, fail-safe digital sanctuary. I built this space to make reading completely effortless: 
-                    smooth continuous vertical scrolling, automatic full-screen page resizing, instant cloud sync 
-                    that never forgets my page, ambient sounds, and an aesthetic bookshelf I can take with me anywhere — 
-                    from my laptop to my phone in bed.
+                    smooth continuous vertical scrolling, automatic full-screen page resizing that fits any device, 
+                    instant cloud progress that never forgets my page, ambient sounds, and an aesthetic bookshelf I can 
+                    take with me anywhere — whether on my laptop at my desk or tucked into bed on my phone.
                   </p>
-                  <div className="about-quote">
-                    <span className="quote-mark" aria-hidden="true">&ldquo;</span>
-                    <p>No lost bookmarks. No bent spines. Just pure stories, exactly where I left off.</p>
-                  </div>
-                </div>
-
-                <div className="about-badges-grid">
-                  <div className="about-badge-card">
-                    <span className="badge-icon">☕</span>
-                    <h4>Chai &amp; Stories</h4>
-                    <p>Always reading with a warm cup nearby (kept at a safe distance now!).</p>
-                  </div>
-                  <div className="about-badge-card">
-                    <span className="badge-icon">🔖</span>
-                    <h4>Zero Lost Pages</h4>
-                    <p>Cloud progress tracking ensures clumsiness never gets between me and my stories.</p>
-                  </div>
-                  <div className="about-badge-card">
-                    <span className="badge-icon">📱</span>
-                    <h4>Read Everywhere</h4>
-                    <p>Installed as an app across phone, tablet, and laptop for effortless, cozy reading.</p>
-                  </div>
                 </div>
               </div>
 
@@ -1338,6 +1316,20 @@ function App() {
           </section>
         )}
       </main>
+
+      {/* Aesthetic Library Footer */}
+      <footer className="library-footer">
+        <div className="footer-container">
+          <span className="footer-mark" aria-hidden="true">❧</span>
+          <p className="footer-made-by">
+            Made with love by <strong>Sumana Choudhury</strong>
+          </p>
+          <p className="footer-wishes">Enjoy reading your favourite stories &amp; cozy adventures!</p>
+          <p className="footer-copyright">
+            &copy; {new Date().getFullYear()} Amar Library. All rights reserved.
+          </p>
+        </div>
+      </footer>
 
       {/* Edit Book Modal */}
       {editingBook && (
