@@ -348,6 +348,7 @@ function App() {
     let createdBook = null
     let uploadedPdfPath = null
     let uploadedCoverPath = null
+    let bookSuccessfullyAdded = false
 
     try {
       const { data: book, error: insertError } = await supabase
@@ -422,6 +423,7 @@ function App() {
       }
 
       setBooks((current) => [{ ...updatedBook, coverUrl }, ...current])
+      bookSuccessfullyAdded = true
       setNewTitle('')
       setNewAuthor('')
       setNewGenre('Fiction')
@@ -429,8 +431,11 @@ function App() {
       setPdfFile(null)
       setCoverFile(null)
       setShowAddBook(false)
-      event.currentTarget.reset()
     } catch (error) {
+      if (bookSuccessfullyAdded) {
+        console.warn('Non-fatal error after book addition:', error)
+        return
+      }
       console.error('Error adding book:', error)
       if (uploadedPdfPath) {
         try {
