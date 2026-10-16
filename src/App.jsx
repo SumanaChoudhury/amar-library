@@ -895,7 +895,6 @@ function App() {
   if (authLoading) {
     return (
       <div className="loading-screen">
-        <span className="loading-icon" aria-hidden="true">❧</span>
         <p className="loading-message">Opening Amar Library...</p>
       </div>
     )
@@ -1144,7 +1143,6 @@ function App() {
                 <p className="loading-message">Gathering your collections...</p>
               ) : collections.length === 0 ? (
                 <div className="empty-state">
-                  <span aria-hidden="true">❧</span>
                   <h3>No collections yet</h3>
                   <p>Organize your books into cozy shelves like "Favorites", "To Read", or "Classics".</p>
                 </div>
@@ -1163,7 +1161,6 @@ function App() {
                           className="collection-select-button"
                           onClick={() => setSelectedCollectionId(col.id)}
                         >
-                          <span className="collection-flower">❧</span>
                           <span>
                             <strong>{col.name}</strong>
                             {col.description && <small>{col.description}</small>}
@@ -1188,7 +1185,6 @@ function App() {
                   <div className="collection-details">
                     {!selectedCollectionId ? (
                       <div className="empty-state">
-                        <span aria-hidden="true">❧</span>
                         <h3>Select a shelf</h3>
                         <p>Click any collection on the left to view and arrange its books.</p>
                       </div>
@@ -1274,7 +1270,6 @@ function App() {
             </div>
           ) : (
             <div className="empty-state">
-              <span aria-hidden="true">❧</span>
               <h3>
                 {activePage === 'Favorites'
                   ? 'No favorites saved yet'
@@ -1315,7 +1310,7 @@ function App() {
                   <span className="about-status-pill">Creator &amp; Reader</span>
                 </div>
                 <div className="about-title-group">
-                  <p className="eyebrow">MEET THE CREATOR ❧</p>
+                  <p className="eyebrow">MEET THE CREATOR</p>
                   <h2>Sumana Choudhury</h2>
                   <p className="about-tagline">The story behind Amar Library.</p>
                 </div>
@@ -1369,7 +1364,6 @@ function App() {
       {/* Aesthetic Library Footer */}
       <footer className="library-footer">
         <div className="footer-container">
-          <span className="footer-mark" aria-hidden="true">❧</span>
           <p className="footer-made-by">
             Made with love by <strong>Sumana Choudhury</strong>
           </p>
@@ -1386,7 +1380,6 @@ function App() {
           <div className="edit-modal-card" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span className="auth-flower" aria-hidden="true">❧</span>
                 <h3>Create Your New Password</h3>
               </div>
               <button
@@ -1594,7 +1587,6 @@ function App() {
               <Suspense
                 fallback={
                   <div className="pdf-reader-suspense">
-                    <span className="loading-icon">❧</span>
                     <p>Opening {selectedPdfTitle}...</p>
                   </div>
                 }

@@ -68,7 +68,7 @@ function BookCard({
         ) : (
           <div className="cover-spine-layout">
             <span className="cover-decoration" aria-hidden="true">
-              {book.cover || '❧'}
+              {book.cover || ''}
             </span>
             <span className="cover-title">{book.title}</span>
             {book.author && <span className="cover-author">{book.author}</span>}

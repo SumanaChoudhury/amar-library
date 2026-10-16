@@ -121,15 +121,6 @@
     linear-gradient(135deg, #f2f4e8 0%, #faf8f2 60%, #ecefe3 100%);
 }
 
-.welcome-decor-leaf {
-  position: absolute;
-  top: 20px;
-  right: 28px;
-  font-size: 38px;
-  opacity: 0.35;
-  pointer-events: none;
-}
-
 .eyebrow {
   margin: 0 0 10px;
   color: var(--sage-dark);
@@ -2256,18 +2247,6 @@ body {
   pointer-events: none;
 }
 
-.welcome-section::after {
-  content: '❧';
-  position: absolute;
-  right: 4%;
-  bottom: -72px;
-  color: rgba(248, 233, 193, .17);
-  font-size: clamp(180px, 28vw, 360px);
-  line-height: 1;
-  transform: rotate(-24deg);
-  pointer-events: none;
-}
-
 .hero-copy { max-width: 570px; position: relative; z-index: 1; }
 
 .hero-kicker {
@@ -2450,18 +2429,6 @@ input:focus, textarea:focus, select:focus { border-color: #84916b; box-shadow: 0
   box-shadow: 0 16px 44px rgba(60, 50, 30, 0.06);
   position: relative;
   overflow: hidden;
-}
-
-.about-me-card::before {
-  content: '❧';
-  position: absolute;
-  top: -24px;
-  right: 20px;
-  font-size: 140px;
-  color: rgba(49, 68, 52, 0.035);
-  font-family: var(--serif, serif);
-  pointer-events: none;
-  user-select: none;
 }
 
 .about-me-header {

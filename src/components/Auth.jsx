@@ -229,7 +229,6 @@ function Auth({ onOtpVerified }) {
     <div className="auth-container">
       <section className="auth-card" aria-label="Authentication">
         <div className="auth-header-decor">
-          <span className="auth-flower" aria-hidden="true">❧</span>
           <span className="eyebrow">
             {authMode === 'forgot' ? 'ACCOUNT RECOVERY' : 'AMAR LIBRARY'}
           </span>

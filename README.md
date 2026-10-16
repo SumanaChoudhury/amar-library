@@ -6,7 +6,7 @@ A cozy, aesthetic personal digital library and in-browser PDF reader built for l
 
 ---
 
-## ❧ About the Creator & Project
+## About the Creator & Project
 
 > *"No lost bookmarks. No bent spines. Just pure stories, exactly where I left off."*
 

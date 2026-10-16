@@ -4,7 +4,6 @@ function Navbar({ activePage, setActivePage, onSignOut }) {
   return (
     <header className="navbar">
       <button className="brand" type="button" onClick={() => setActivePage('Home')} aria-label="Go to home">
-        <span className="brand-mark" aria-hidden="true">❧</span>
         <span className="brand-name">Amar Library</span>
       </button>
 
